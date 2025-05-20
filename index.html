@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P5 Rekayasa Teknologi</title>
+  <style>
+    body {
+      background-color: white;
+      margin: 0;
+      font-family: 'Lucida Bright', serif;
+    }
+
+    header {
+      position: relative;
+      background-color: maroon;
+      color: white;
+      text-align: center;
+      padding: 60px 20px 20px;
+      font-weight: bold;
+    }
+
+    header::before {
+      content: "";
+      background: url('foto-gedung-sma.jpg') no-repeat center/cover;
+      opacity: 0.3;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    header h1 {
+      font-size: 36px;
+      margin: 0;
+      z-index: 1;
+      position: relative;
+    }
+
+    header p {
+      font-size: 16px;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+      color: maroon;
+      background-color: white;
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 5px;
+    }
+
+    nav {
+      background-color: maroon;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      gap: 15px;
+      position: relative;
+    }
+
+    nav button {
+      background-color: transparent;
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+/* Responsive */
+/* Extra small devices (phones, 320px and down) */
+    @media screen and (max-width: 768px) {
+      .container {
+        width: 95%;
+        padding: 10px;
+      }
+    }
+
+/* Small devices (large phones, 321px to 480px) */
+    @media screen and (min-width: 321px) and (max-width: 480px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+    }
+
+/* Medium devices (tablets, 481px to 768px) */
+    @media screen and (min-width: 481px) and (max-width: 768px) {
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+
+/* Large devices (laptops/desktops, 769px to 1024px) */
+    @media screen and (min-width: 769px) and (max-width: 1024px) {
+      .container {
+        width: 85%;
+        padding: 25px;
+      }
+    }
+
+/* Extra large devices (large laptops and desktops, 1025px to 1200px) */
+    @media screen and (min-width: 1025px) and (max-width: 1200px) {
+      .container {
+          width: 80%;
+          padding: 30px;
+      }
+    }
+/*end of Responsive*/
+
+    .logo {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      height: 80px;
+    }
+
+    .list-hiasan {
+      background-color: grey;
+      height: 5px;
+      width: 100%;
+    }
+
+    .content {
+      padding: 20px;
+      color: maroon;
+    }
+
+    .content img {
+      width: 50%;
+      height: 500px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .content p.deskripsi-gambar {
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    marquee {
+      background-color: grey;
+      color: maroon;
+      font-weight: bold;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo-smansa.png" alt="Logo SMA" class="logo">
+    <h1>P5 Rekayasa Teknologi</h1>
+    <p>oleh Kelompok 2 XI Kartini 6</p>
+  </header>
+
+  <div class="list-hiasan"></div>
+
+  <nav>
+    <button onclick="tampilkan('tentang')">Home</button>
+    <button onclick="tampilkan('tujuan')">Tujuan P5</button>
+    <button onclick="tampilkan('hasil')">Hasil Rekayasa Teknologi</button>
+    <button onclick="tampilkan('kegiatan')">Kegiatan P5</button>
+    <button onclick="tampilkan('kontak')">Kontak</button>
+  </nav>
+
+  <div class="content" id="isiKonten">
+    <!-- Konten akan dimuat di sini -->
+  </div>
+
+  <marquee behavior="scroll" direction="left">Selamat datang di website kami • Terima kasih atas kunjungan anda</marquee>
+
+  <script>
+    const konten = {
+      tentang: `<h2>APA ITU REKAYASA TEKNOLOGI?</h2>
+        
+    <p>Rekayasa teknologi adalah proses penerapan ilmu pengetahuan, matematika, dan prinsip teknik dalam merancang, mengembangkan, serta mengimplementasikan teknologi untuk menyelesaikan berbagai permasalahan dalam kehidupan manusia. Rekayasa ini mencakup kegiatan analisis, perancangan, pembuatan, serta pengujian alat, sistem, atau proses dengan tujuan meningkatkan efisiensi, efektivitas, dan kebermanfaatan suatu teknologi.</p>
+    <p>Dalam praktiknya, rekayasa teknologi tidak hanya terbatas pada penciptaan teknologi baru, tetapi juga mencakup pengembangan dan penyempurnaan dari teknologi yang sudah ada. Proses ini memerlukan pemahaman mendalam terhadap aspek teknis, fungsional, ekonomis, dan bahkan sosial serta lingkungan.</p>
+    <p>Rekayasa teknologi sangat luas cakupannya dan meliputi berbagai bidang, seperti teknik mesin, teknik elektro, teknik informatika, teknik sipil, bioteknologi, dan lain-lain. Setiap cabang tersebut berfokus pada pengembangan solusi yang sesuai dengan kebutuhan di bidangnya masing-masing.</p>
+    <p>Peran rekayasa teknologi sangat vital dalam kehidupan modern. Teknologi hasil rekayasa digunakan dalam hampir semua aspek kehidupan, mulai dari transportasi, komunikasi, energi, kesehatan, hingga pendidikan. Oleh karena itu, rekayasa teknologi menjadi kunci utama dalam mendorong inovasi, meningkatkan produktivitas, serta menciptakan kemajuan yang berkelanjutan bagi masyarakat dan peradaban manusia.</p>`,
+
+      tujuan: `<h2>TUJUAN P5 REKAYASA TEKNOLOGI</h2>
+        <p>Rekayasa teknologi memiliki tujuan utama untuk menciptakan solusi yang efektif dan efisien terhadap berbagai permasalahan manusia melalui pemanfaatan ilmu pengetahuan dan teknologi. Secara umum, tujuan-tujuan dari rekayasa teknologi antara lain:
+        </p>
+
+        <p>
+          <b>1. Meningkatkan Kualitas Hidup</b><br>
+          Dengan mengembangkan teknologi yang bermanfaat, rekayasa teknologi membantu mempermudah aktivitas manusia dan meningkatkan kenyamanan serta keselamatan hidup.
+        </p>
+
+        <p>
+          <b>2. Menciptakan Inovasi dan Solusi Baru</b><br>
+          Rekayasa teknologi mendorong terciptanya ide-ide baru yang dapat menghasilkan alat, sistem, atau metode yang lebih canggih dan efektif.
+        </p>
+
+        <p>
+          <b>3. Mengoptimalkan Sumber Daya</b><br>
+          Bertujuan untuk menggunakan sumber daya alam dan energi secara lebih efisien sehingga menghasilkan manfaat maksimal dengan dampak lingkungan yang minimal.
+        </p>
+
+        <p>
+          <b>4. Meningkatkan Produktivitas dan Efisiensi</b><br>
+          Teknologi yang dihasilkan dari proses rekayasa memungkinkan pekerjaan dilakukan lebih cepat, tepat, dan hemat biaya.
+        </p>
+
+        <p>
+          <b>5. Menjawab Tantangan Global</b><br>
+          Termasuk dalam menghadapi isu-isu seperti perubahan iklim, krisis energi, dan kebutuhan pangan, melalui pengembangan teknologi berkelanjutan dan ramah lingkungan.
+        </p>
+
+        <p>
+          <b>6. Mendorong Pertumbuhan Ekonomi dan Industri</b><br>
+          Rekayasa teknologi berperan besar dalam pengembangan industri dan penciptaan lapangan kerja, sehingga memperkuat ekonomi suatu negara.
+        </p>
+        <br><br><br>`,        
+
+
+      hasil: `<h2>HASIL REKAYASA TEKNOLOGI</h2>
+        <p>Berikut adalah beberapa hasil karya kami dalam rekayasa teknologi:</p>
+
+        <img src="gambar-hasil1.jpg" alt="Hasil 1"  w="50%" h="50px">
+        <p class="deskripsi-gambar">1. Alat Penyiram Tanaman Otomatis - Menggunakan sensor kelembaban untuk menyiram tanaman secara otomatis.
+        </p>
+        <p class="deskripsi">Alat penyiram tanaman otomatis adalah perangkat yang dirancang untuk menyiram tanaman secara otomatis sesuai jadwal atau berdasarkan kelembapan tanah. Alat ini biasanya terdiri dari sensor kelembapan, sistem pompa air, dan timer atau mikrokontroler (seperti Arduino). Tujuannya adalah untuk memastikan tanaman mendapatkan air yang cukup tanpa perlu disiram secara manual, sehingga lebih efisien dan praktis, terutama untuk pemilik tanaman yang sibuk atau sering bepergian.
+        </p>
+
+        <img src="gambar-hasil2.jpg" alt="Hasil 2">
+        <p class="deskripsi-gambar">2. AC Adiwiyata - Menggunakan sensor suhu otomatis.
+        </p>
+        <p>Sistem pendingin udara yang dirancang khusus untuk lingkungan sekolah yang menerapkan program Adiwiyata, yaitu sekolah yang peduli dan berbudaya lingkungan. Sistem ini mengintegrasikan teknologi sensor suhu otomatis untuk mengoptimalkan kenyamanan dan efisiensi energi di ruang kelas dan area sekolah lainnya.
+        </p>
+
+        <img src="gambar-hasil3.jpg" alt="Hasil 3">
+        <p class="deskripsi-gambar">3. Tempat Sampah Otomatis- Menggunakan sensor tangan, agar tangan tidak terkena tempat sampah.
+        </p>
+        <p>Tempat sampah otomatis dengan sensor tangan adalah tempat sampah pintar yang dilengkapi sensor inframerah untuk mendeteksi gerakan tangan di dekat tutupnya. Saat tangan didekatkan, sensor akan memicu mekanisme untuk membuka tutup secara otomatis, lalu menutup kembali setelah beberapa detik. Teknologi ini dirancang untuk menjaga kebersihan, mengurangi sentuhan langsung, dan mempermudah pembuangan sampah secara higienis.
+        </p>
+
+        <img src="gambar-hasil4.jpg" alt="Hasil 4">
+        <p class="deskripsi-gambar">4. Pendeteksi Kebakaran - Mengunakan sensor panas.</p>
+        <p>Alat pendeteksi kebakaran dengan sensor panas adalah perangkat yang berfungsi untuk mendeteksi kebakaran berdasarkan peningkatan suhu di sekitarnya. Sensor panas ini akan mengaktifkan alarm jika suhu ruangan melebihi ambang batas tertentu, menandakan kemungkinan terjadinya kebakaran. Alat ini efektif digunakan di lingkungan yang banyak menghasilkan asap atau uap, seperti dapur atau pabrik, di mana sensor asap kurang optimal.
+        </p>
+
+        <img src="gambar-hasil5.jpg" alt="Hasil 5">
+        <p class="deskripsi-gambar">5. Vacuum Cleaner- Menggunakan dinamo untuk menggerakkan kipas.
+        </p>
+        <p>Alat vacuum cleaner dengan dinamo untuk menggerakkan kipas adalah perangkat pembersih yang menggunakan motor dinamo untuk menghasilkan daya hisap melalui kipas yang berputar. Dinamo ini mengubah energi listrik menjadi energi mekanik untuk menggerakkan kipas, yang kemudian menciptakan aliran udara kuat yang menyedot debu dan kotoran ke dalam wadah atau kantong pembuangan. Sistem ini memastikan kinerja penyedotan yang efisien dan optimal dalam membersihkan permukaan.
+        </p>
+        <br><br><br>`,
+
+      kegiatan: `<h2>KEGIATAN P5 REKAYASA TEKNOLOGI</h2>
+        <ul>
+          <li>Identifikasi masalah di lingkungan sekitar.</li>
+          <li>Brainstorming ide solusi teknologi.</li>
+          <li>Pembuatan proposal dan desain alat.</li>
+          <li>Pembuatan prototipe alat.</li>
+          <li>Uji coba dan evaluasi prototipe.</li>
+          <li>Presentasi hasil karya dalam Gelar Karya P5.</li>
+        </ul>`,
+
+      kontak: `<h2>KONTAK KAMI</h2>
+        <p>Kelompok 2 XI Kartini 6</p>
+
+        <p><span>Email: <a href="mailto:kelompok2kartini6@sma1pekalongan.sch.id" target="_blank">kelompok2kartini6@sma1pekalongan.sch.id</a></span></p>
+
+        <p><span>Instagram: <a href="https://instagram.com/kartini6.inovasi" target="_blank">@kartini6.inovasi</a></span></p>`
+    };
+
+    function tampilkan(key) {
+      document.getElementById('isiKonten').innerHTML = konten[key];
+    }
+
+    // Tampilkan konten 'tentang' secara default saat halaman dimuat
+    window.onload = function() {
+      tampilkan('tentang');
+    };
+  </script>
+</body>
+</html>
