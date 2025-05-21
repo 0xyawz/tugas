@@ -9,6 +9,8 @@
       background-color: white;
       margin: 0;
       font-family: 'Lucida Bright', serif;
+      overflow-x: hidden; /* Prevent horizontal scroll */
+      width: 100%; /* Ensure body takes full width */
     }
 
     header {
@@ -18,6 +20,8 @@
       text-align: center;
       padding: 60px 20px 20px;
       font-weight: bold;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     header::before {
@@ -57,7 +61,20 @@
       justify-content: center;
       padding: 10px;
       gap: 15px;
-      position: relative;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    nav.sticky {
+      position: fixed;
+      top: 0;
+    }
+
+    nav.scrolled {
+      background-color: rgba(128, 0, 0, 0.95);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     nav button {
@@ -66,49 +83,128 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      padding: 8px 15px;
+      transition: all 0.3s ease;
+      border-radius: 4px;
+    }
+
+    nav button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    nav button.active {
+      background-color: white;
+      color: maroon;
     }
 
 /* Responsive */
-/* Extra small devices (phones, 320px and down) */
-    @media screen and (max-width: 768px) {
-      .container {
-        width: 95%;
+    @media screen and (max-width: 480px) {
+      header h1 {
+        font-size: 24px;
+      }
+      
+      nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        position: relative;
+      }
+
+      nav button {
+        display: none;
+        width: 100%;
+        padding: 15px;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      nav button.active {
+        display: block;
+      }
+
+      nav.expanded button {
+        display: block;
+      }
+      
+      .content {
         padding: 10px;
       }
+      
+      .content img {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+        object-fit: cover;
+        padding: 5px;
+      }
+      
+      .logo {
+        height: 60px;
+      }
     }
 
-/* Small devices (large phones, 321px to 480px) */
-    @media screen and (min-width: 321px) and (max-width: 480px) {
-      .container {
-        width: 95%;
+    @media screen and (min-width: 481px) and (max-width: 1024px) {
+      header h1 {
+        font-size: 28px;
+      }
+      
+      nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        position: relative;
+      }
+
+      nav button {
+        display: none;
+        width: 100%;
+        padding: 15px;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      nav button.active {
+        display: block;
+      }
+
+      nav.expanded button {
+        display: block;
+      }
+      
+      .content {
         padding: 15px;
       }
-    }
-
-/* Medium devices (tablets, 481px to 768px) */
-    @media screen and (min-width: 481px) and (max-width: 768px) {
-      .container {
-        width: 90%;
-        padding: 20px;
+      
+      .content img {
+        width: 100%;
+        height: auto;
+        max-height: 350px;
+        object-fit: cover;
+        padding: 10px;
+      }
+      
+      .logo {
+        height: 70px;
       }
     }
 
-/* Large devices (laptops/desktops, 769px to 1024px) */
-    @media screen and (min-width: 769px) and (max-width: 1024px) {
-      .container {
-        width: 85%;
-        padding: 25px;
+    @media screen and (min-width: 1025px) {
+      .content {
+        padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+      
+      .content img {
+        width: 60%;
+        height: auto;
+        max-height: 500px;
+        object-fit: cover;
+        margin: 20px auto;
+        display: block;
       }
     }
-
-/* Extra large devices (large laptops and desktops, 1025px to 1200px) */
-    @media screen and (min-width: 1025px) and (max-width: 1200px) {
-      .container {
-          width: 80%;
-          padding: 30px;
-      }
-    }
-/*end of Responsive*/
 
     .logo {
       position: absolute;
@@ -126,6 +222,8 @@
     .content {
       padding: 20px;
       color: maroon;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .content img {
@@ -149,6 +247,7 @@
       position: fixed;
       bottom: 0;
       width: 100%;
+      box-sizing: border-box;
     }
   </style>
 </head>
@@ -161,8 +260,8 @@
 
   <div class="list-hiasan"></div>
 
-  <nav>
-    <button onclick="tampilkan('tentang')">Home</button>
+  <nav id="mainNav">
+    <button onclick="tampilkan('tentang')" class="active">Home</button>
     <button onclick="tampilkan('tujuan')">Tujuan P5</button>
     <button onclick="tampilkan('hasil')">Hasil Rekayasa Teknologi</button>
     <button onclick="tampilkan('kegiatan')">Kegiatan P5</button>
@@ -182,7 +281,8 @@
     <p>Rekayasa teknologi adalah proses penerapan ilmu pengetahuan, matematika, dan prinsip teknik dalam merancang, mengembangkan, serta mengimplementasikan teknologi untuk menyelesaikan berbagai permasalahan dalam kehidupan manusia. Rekayasa ini mencakup kegiatan analisis, perancangan, pembuatan, serta pengujian alat, sistem, atau proses dengan tujuan meningkatkan efisiensi, efektivitas, dan kebermanfaatan suatu teknologi.</p>
     <p>Dalam praktiknya, rekayasa teknologi tidak hanya terbatas pada penciptaan teknologi baru, tetapi juga mencakup pengembangan dan penyempurnaan dari teknologi yang sudah ada. Proses ini memerlukan pemahaman mendalam terhadap aspek teknis, fungsional, ekonomis, dan bahkan sosial serta lingkungan.</p>
     <p>Rekayasa teknologi sangat luas cakupannya dan meliputi berbagai bidang, seperti teknik mesin, teknik elektro, teknik informatika, teknik sipil, bioteknologi, dan lain-lain. Setiap cabang tersebut berfokus pada pengembangan solusi yang sesuai dengan kebutuhan di bidangnya masing-masing.</p>
-    <p>Peran rekayasa teknologi sangat vital dalam kehidupan modern. Teknologi hasil rekayasa digunakan dalam hampir semua aspek kehidupan, mulai dari transportasi, komunikasi, energi, kesehatan, hingga pendidikan. Oleh karena itu, rekayasa teknologi menjadi kunci utama dalam mendorong inovasi, meningkatkan produktivitas, serta menciptakan kemajuan yang berkelanjutan bagi masyarakat dan peradaban manusia.</p>`,
+    <p>Peran rekayasa teknologi sangat vital dalam kehidupan modern. Teknologi hasil rekayasa digunakan dalam hampir semua aspek kehidupan, mulai dari transportasi, komunikasi, energi, kesehatan, hingga pendidikan. Oleh karena itu, rekayasa teknologi menjadi kunci utama dalam mendorong inovasi, meningkatkan produktivitas, serta menciptakan kemajuan yang berkelanjutan bagi masyarakat dan peradaban manusia.</p>
+      <br><br><br>`,
 
       tujuan: `<h2>TUJUAN P5 REKAYASA TEKNOLOGI</h2>
         <p>Rekayasa teknologi memiliki tujuan utama untuk menciptakan solusi yang efektif dan efisien terhadap berbagai permasalahan manusia melalui pemanfaatan ilmu pengetahuan dan teknologi. Secara umum, tujuan-tujuan dari rekayasa teknologi antara lain:
@@ -223,7 +323,7 @@
       hasil: `<h2>HASIL REKAYASA TEKNOLOGI</h2>
         <p>Berikut adalah beberapa hasil karya kami dalam rekayasa teknologi:</p>
 
-        <img src="gambar-hasil1.jpg" alt="Hasil 1"  w="50%" h="50px">
+        <img src="gambar-hasil1.jpg" alt="Hasil 1">
         <p class="deskripsi-gambar">1. Alat Penyiram Tanaman Otomatis - Menggunakan sensor kelembaban untuk menyiram tanaman secara otomatis.
         </p>
         <p class="deskripsi">Alat penyiram tanaman otomatis adalah perangkat yang dirancang untuk menyiram tanaman secara otomatis sesuai jadwal atau berdasarkan kelembapan tanah. Alat ini biasanya terdiri dari sensor kelembapan, sistem pompa air, dan timer atau mikrokontroler (seperti Arduino). Tujuannya adalah untuk memastikan tanaman mendapatkan air yang cukup tanpa perlu disiram secara manual, sehingga lebih efisien dan praktis, terutama untuk pemilik tanaman yang sibuk atau sering bepergian.
@@ -268,12 +368,52 @@
 
         <p><span>Email: <a href="mailto:kelompok2kartini6@sma1pekalongan.sch.id" target="_blank">kelompok2kartini6@sma1pekalongan.sch.id</a></span></p>
 
-        <p><span>Instagram: <a href="https://www.instagram.com/phoenisiix/" target="_blank">@phoenisiix</a></span></p>`
+        <p><span>Instagram: <a href="https://instagram.com/phoenisiix" target="_blank">@phoenisiix</a></span></p>`
     };
 
     function tampilkan(key) {
+      // Remove active class from all buttons
+      const buttons = document.querySelectorAll('nav button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      
+      // Add active class to clicked button
+      const activeButton = document.querySelector(`button[onclick="tampilkan('${key}')"]`);
+      if (activeButton) activeButton.classList.add('active');
+      
       document.getElementById('isiKonten').innerHTML = konten[key];
+
+      // For mobile and tablet: toggle nav expansion when clicking active button
+      if (window.innerWidth <= 1024) {
+        const nav = document.getElementById('mainNav');
+        if (nav.contains(event.target)) {
+          nav.classList.toggle('expanded');
+        }
+      }
     }
+
+    // Handle scroll effects
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      const navTop = nav.offsetTop;
+      
+      if (window.innerWidth <= 1024) { // For mobile and tablet
+        if (window.scrollY > navTop) {
+          nav.classList.add('sticky');
+          nav.classList.add('scrolled');
+        } else {
+          nav.classList.remove('sticky');
+          nav.classList.remove('scrolled');
+        }
+      } else { // For desktop
+        if (window.scrollY === 0) {
+          nav.classList.remove('sticky');
+          nav.classList.remove('scrolled');
+        } else if (window.scrollY > navTop) {
+          nav.classList.add('sticky');
+          nav.classList.add('scrolled');
+        }
+      }
+    });
 
     // Tampilkan konten 'tentang' secara default saat halaman dimuat
     window.onload = function() {
